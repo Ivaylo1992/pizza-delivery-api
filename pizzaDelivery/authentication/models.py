@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 
+from PizzaDelivery.authentication.managers import CustomUserManager
+
 
 class User(AbstractUser):
     username = models.CharField(
@@ -22,6 +24,8 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
 
     REQUIRED_FIELDS = ['username', 'phone_number']
+
+    objects = CustomUserManager()
 
     # objects = CustomUserManager()
 
