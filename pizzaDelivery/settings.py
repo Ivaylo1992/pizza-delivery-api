@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
@@ -45,7 +46,8 @@ INSTALLED_APPS = [
 
     #third party apps
     'rest_framework',
-    "phonenumber_field",
+    'phonenumber_field',
+    'djoser',
 
 ] + PROJECT_APS
 
@@ -60,7 +62,16 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'NON_FIELD_ERRORS_KEY': 'error'
+    'NON_FIELD_ERRORS_KEY': 'error',
+     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('Bearer',),
+   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 ROOT_URLCONF = 'PizzaDelivery.urls'
