@@ -19,6 +19,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
     
     password = serializers.CharField(
         min_length=8,
+        write_only=True,
     )
 
     class Meta:
@@ -54,3 +55,17 @@ class UserCreationSerializer(serializers.ModelSerializer):
             )
         
         return super().validate(attrs)
+    
+    def create(self, validated_data):
+        user = User.objects.create(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            phone_number=validated_data['phone_number'],
+        )
+
+        user.set_password(validated_data['password'])
+
+        user.save()
+
+        return user
+    

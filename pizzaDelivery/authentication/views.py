@@ -3,14 +3,6 @@ from rest_framework.response import Response
 from .models import User
 from .serializers import UserCreationSerializer
 
-class HelloAuthView(views.GenericAPIView):
-    def get(self, request):
-        return Response(
-            data={
-                'message': 'Hello !'
-            },
-            status=status.HTTP_200_OK,
-        )
 
 class UserCreateView(views.CreateAPIView):
     serializer_class = UserCreationSerializer

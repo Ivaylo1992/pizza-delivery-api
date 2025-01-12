@@ -10,4 +10,11 @@ class OrderCreationSerializer(serializers.ModelSerializer):
 
 class OrderDetailSerializer(OrderCreationSerializer):
     class Meta(OrderCreationSerializer.Meta):
-        fields = ('size', 'status', 'quantity', 'created_at', 'updated_at')
+        fields = ('id', 'size', 'status', 'quantity', 'created_at', 'updated_at')
+
+
+class StatusUpdateSerializer(OrderCreationSerializer):
+    class Meta(OrderCreationSerializer.Meta):
+        fields = ('status',)
+
+
