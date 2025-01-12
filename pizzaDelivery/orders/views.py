@@ -130,7 +130,7 @@ class UpdateOrderStatus(views.GenericAPIView):
 class UserOrdersView(views.GenericAPIView):
     serializer_class = OrderDetailSerializer
 
-    parser_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, user_id):
         user = UserModel.objects.get(pk=user_id)
@@ -153,7 +153,7 @@ class UserOrdersView(views.GenericAPIView):
 class UserOrderDetailView(views.GenericAPIView):
     serializer_class = OrderDetailSerializer
 
-    parser_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, user_id, order_id):
         user = UserModel.objects.get(pk=user_id)

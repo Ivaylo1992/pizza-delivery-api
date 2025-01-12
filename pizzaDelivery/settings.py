@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'phonenumber_field',
     'djoser',
+    'drf_yasg',
 
 ] + PROJECT_APS
 
@@ -72,6 +73,16 @@ SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('Bearer',),
    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
 }
 
 ROOT_URLCONF = 'PizzaDelivery.urls'
