@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from .models import Order
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from drf_yasg.utils import swagger_auto_schema
 
 from PizzaDelivery.orders.serializers import OrderCreationSerializer, OrderDetailSerializer, StatusUpdateSerializer
 
@@ -16,6 +17,9 @@ class OrderCreateListView(views.GenericAPIView):
 
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    @swagger_auto_schema(
+            operation_summary='List all orders made'
+        )
     def get(self, request):
         orders = Order.objects.all()
 
@@ -29,6 +33,9 @@ class OrderCreateListView(views.GenericAPIView):
             status=status.HTTP_200_OK
         )
 
+    @swagger_auto_schema(
+            operation_summary='Create an order'
+        )
     def post(self, request):
         data = request.data
         serializer = self.serializer_class(data=data)
@@ -53,6 +60,9 @@ class OrderDetailView(views.GenericAPIView):
 
     permission_classes = [IsAdminUser]
     
+    @swagger_auto_schema(
+            operation_summary='Get order details by id'
+        )
     def get(self, request, order_id):
         order=get_object_or_404(Order, pk=order_id)
 
@@ -63,6 +73,9 @@ class OrderDetailView(views.GenericAPIView):
             status=status.HTTP_200_OK
         )
     
+    @swagger_auto_schema(
+            operation_summary='Update an order by id'
+        )
     def put(self, request, order_id):
         data = request.data
 
@@ -86,7 +99,9 @@ class OrderDetailView(views.GenericAPIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-
+    @swagger_auto_schema(
+            operation_summary='Remove/delete an order'
+        )
 
     def delete(self, request, order_id):
         order = get_object_or_404(Order, pk=order_id)
@@ -103,6 +118,9 @@ class UpdateOrderStatus(views.GenericAPIView):
 
     permission_classes = [IsAdminUser]
 
+    @swagger_auto_schema(
+            operation_summary='Update an order status by id'
+        )
     def put(self, requset, order_id):
         order = get_object_or_404(Order, pk=order_id)
 
@@ -132,6 +150,9 @@ class UserOrdersView(views.GenericAPIView):
 
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+            operation_summary='Get all orders for a user'
+        )
     def get(self, request, user_id):
         user = UserModel.objects.get(pk=user_id)
 
@@ -155,6 +176,9 @@ class UserOrderDetailView(views.GenericAPIView):
 
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+            operation_summary='Get a specific order of a user by id'
+        )
     def get(self, request, user_id, order_id):
         user = UserModel.objects.get(pk=user_id)
 
