@@ -17,12 +17,12 @@ A simple API for managing pizza orders, customers, and delivery information.
 
 ## 🛠️ Technologies Used
 
-- [FastAPI](https://fastapi.tiangolo.com/) — modern, fast (high-performance) web framework for APIs
-- [Uvicorn](https://www.uvicorn.org/) — lightning-fast ASGI server
-- [Pydantic](https://docs.pydantic.dev/latest/) — data validation and settings management
-- [PostgreSQL](https://www.postgresql.org/) — relational database
-- [SQLAlchemy](https://www.sqlalchemy.org/) — ORM for database interactions
-- [JWT](https://jwt.io/) — authentication
+- [Django](https://www.djangoproject.com/) — high-level Python web framework
+- [Django REST Framework (DRF)](https://www.django-rest-framework.org/) — toolkit for building Web APIs
+- [PostgreSQL](https://www.postgresql.org/) — powerful relational database
+- [Djoser](https://djoser.readthedocs.io/en/latest/) or [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/) — authentication and token management
+- [drf-yasg](https://drf-yasg.readthedocs.io/en/stable/) — automatic generation of Swagger/OpenAPI documentation
+
 
 ---
 
@@ -30,15 +30,17 @@ A simple API for managing pizza orders, customers, and delivery information.
 
 ```bash
 pizza-delivery-api/
-├── main.py           # Main entry point
-├── models.py         # Pydantic models (schemas) & SQLAlchemy models
-├── routers/
-│   └── order_router.py  # API endpoints for orders
-│   └── customer_router.py  # API endpoints for customers
-│   └── auth_router.py  # API endpoints for authentication
-├── database.py       # Database connection and session management
-├── requirements.txt  # Python dependencies
-└── alembic/          # Database migrations (if using Alembic)
+├── manage.py          # Django project manager
+├── pizza_delivery/    # Django project settings
+│   └── settings.py    # Project settings
+├── orders/            # Django app for managing orders
+│   ├── models.py      # Order and Customer models
+│   ├── serializers.py # DRF serializers
+│   ├── views.py       # API views
+│   ├── urls.py        # App URL configuration
+├── authentication/    # (Optional) App for authentication
+├── requirements.txt   # Python dependencies
+└── README.md          # Project documentation
 ```
 
 ## ⚡ Getting Started
@@ -65,12 +67,11 @@ pip install -r requirements.txt
 Set up PostgreSQL or another database of your choice:
 
 1. Create a PostgreSQL database.
-2. Configure your database connection in the `database.py` file.
-
-If using Alembic for migrations:
+2. Configure your database connection in the `pizza_delivery/settings.py` file.
+3. Apply migratinons
 
 ```bash
-alembic upgrade head
+python manage.py migrate
 ```
 
 ### 4. Run the Server
@@ -112,12 +113,11 @@ uvicorn main:app --reload
 ## 📦 Requirements
 
 - Python 3.8 or newer
-- FastAPI
-- Uvicorn
-- Pydantic
+- Django
+- Django REST framework
+- djangorestframework-simplejwt or djoser (for authentication)
 - PostgreSQL (or another database)
-- Alembic (for database migrations)
-- JWT Authentication
+- drf-yasg (for API docs)
 
 You can install all dependencies by running:
 
