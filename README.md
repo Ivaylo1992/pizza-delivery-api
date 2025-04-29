@@ -26,23 +26,6 @@ A simple API for managing pizza orders, customers, and delivery information.
 
 ---
 
-## 📂 Project Structure
-
-```bash
-pizza-delivery-api/
-├── manage.py          # Django project manager
-├── pizza_delivery/    # Django project settings
-│   └── settings.py    # Project settings
-├── orders/            # Django app for managing orders
-│   ├── models.py      # Order and Customer models
-│   ├── serializers.py # DRF serializers
-│   ├── views.py       # API views
-│   ├── urls.py        # App URL configuration
-├── authentication/    # (Optional) App for authentication
-├── requirements.txt   # Python dependencies
-└── README.md          # Project documentation
-```
-
 ## ⚡ Getting Started
 
 ### 1. Clone the Repository
